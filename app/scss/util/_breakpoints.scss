@@ -1,0 +1,31 @@
+// Mixins and Built in Modules
+//3 breakpoints, mobile 700px, tablet 900px, desktop 1440px
+//this is used in _grid.scss. at the top of that page @use '../util' as u;
+
+$breakpoints-up: (
+    'medium': 48em,  //768px % 16. best to us em for media queries.
+    'large': 64em,   //1024px % 16
+    'xlarge': 90em  //1440 % 16
+    );
+
+    //767.98px, 1023.98, 1439.98 this avoids overlap. This is how bootstrap does it.
+    
+$breakpoints-down: (  //this is for max-width
+    'small': 47.98em,
+    'medium': 63.98em,
+    'large': 89.98em
+);
+
+
+
+@mixin breakpoint($size) {
+    @media (min-width: map-get($breakpoints-up, $size)) {
+        @content;
+    }
+}
+
+@mixin breakpoint-down($size) {
+    @media(max-width: map-get($breakpoints-down, $size)) {
+        @content;
+    }
+}

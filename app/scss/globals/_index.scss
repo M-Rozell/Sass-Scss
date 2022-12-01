@@ -1,0 +1,6 @@
+//@forward takes all the styles from these files and forwards them from the global folder to the main scss file.
+//add @forward 'globals'; to style.scss file to link.
+
+@forward 'boilerplate'; //using the sass @ rule to load these styles.
+@forward 'typography';  //you can write the whole name out if you want.
+@forward 'colors';

@@ -1,0 +1,54 @@
+
+@use '../util' as u;
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr; //1 column.
+    grid-template-rows: auto auto; //auto-the row will be sized based on how much content the grid content contains.
+    gap: 40px; //a space of 40px b/w all rows in the grid.
+    //max-width: 1000px;
+    width: min(100% - 40px, 1000px); //with margin-inline set to auto, 100%-40px will add 20px of space to the left and right of our grid element on mobile.
+    margin-inline: auto;
+
+
+    // @media (min-width: 1024px) { we will be using Mixins instead of this
+    //     grid-template-columns: 2fr 1fr;   the first column (main content) is going to be 2times as wide as the second column.
+    //     grid-template-rows: auto;       for screens 900px and up the grid will just have 1 row set to auto.
+    // }
+
+    @include u.breakpoint(large) {  //not sure if the u. is still necessary. 
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: auto;
+    }
+
+    &__main, &__sidebar { //compound selector
+        padding: 40px;
+    }
+
+
+    &__main {
+        background-color: hsl(240, 15%, 40%);
+
+        //breakpoints must be included in order of size. min-width. cascade
+        @include u.breakpoint(medium) {
+            background-color: hsl(120, 100%, 25%);
+        }
+
+        @include u.breakpoint(large) {
+            background-color: hsl(38, 98%, 50%);
+        }
+    }
+
+    &__sidebar {
+        background-color: hsl(300, 26%, 35%);
+        
+        //breakpoint sizes must descend with max-width breakpoints.
+        @include u.breakpoint-down(medium) { //like using a media query with a max-width.
+            text-align: center;
+        }
+
+        @include u.breakpoint-down(small) { //like using a media query with a max-width.
+            text-align: right;
+        }
+    }
+}

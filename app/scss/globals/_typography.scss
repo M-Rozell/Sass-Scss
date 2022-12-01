@@ -1,0 +1,21 @@
+
+@use '../util' as u;
+
+h1,
+ h2,
+  h3 {
+    font-weight: 700; //bold
+    line-height: 1.1; //the line height of text will be just a little bigger than the font size itself.
+    margin-top: 0; //browsers will add a margin top and bottom to a lot of these elements
+
+}
+
+p {
+    margin-top: 0;
+}
+
+a,          //all link tags
+ a:visited,
+  a:active {
+    text-decoration: none; //remove the line that browsers add to links.
+}

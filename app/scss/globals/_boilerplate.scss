@@ -1,0 +1,22 @@
+
+// @use '../util'; //Sass module for link to sass variables.
+@use '../util' as u;
+
+html {
+    box-sizing: border-box; //all borders and padding will be included to final width and height.
+    font-size: 100%; //for accessibility purposes. default 16px
+}
+
+*,
+ *::before,
+  *::after{
+    box-sizing: inherit; //you want everything to inherit from the html root element
+}
+
+body {
+    margin: 0; //browsers will load margins and padding unless otherwise specified.
+    padding: 0;
+    font-family: u.$font; //Sass variable with namespace. namespace is util.
+    background-color: var(--background-color); //css custom property or also called css variable
+    color: var(--text-color);
+}
