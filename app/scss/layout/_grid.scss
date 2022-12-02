@@ -1,13 +1,18 @@
 
 @use '../util' as u;
 
+//Placeholder
+%widget {
+    // padding: u.rem(16); 
+}
+
 .grid {
     display: grid;
     grid-template-columns: 1fr; //1 column.
     grid-template-rows: auto auto; //auto-the row will be sized based on how much content the grid content contains.
     gap: 40px; //a space of 40px b/w all rows in the grid.
     //max-width: 1000px;
-    width: min(100% - 40px, 1000px); //with margin-inline set to auto, 100%-40px will add 20px of space to the left and right of our grid element on mobile.
+    width: min(100% - u.rem(40), u.rem(1000)); //with margin-inline set to auto, 100%-40px will add 20px of space to the left and right of our grid element on mobile.
     margin-inline: auto;
 
 
@@ -22,7 +27,7 @@
     }
 
     &__main, &__sidebar { //compound selector
-        padding: 40px;
+        padding: u.rem(40);
     }
 
 
@@ -40,7 +45,7 @@
     }
 
     &__sidebar {
-        background-color: hsl(300, 26%, 35%);
+        
         
         //breakpoint sizes must descend with max-width breakpoints.
         @include u.breakpoint-down(medium) { //like using a media query with a max-width.
@@ -50,5 +55,35 @@
         @include u.breakpoint-down(small) { //like using a media query with a max-width.
             text-align: right;
         }
+    }
+
+    &__widget {
+        $widget: &; //sass variable
+
+        //removed padding and moved to placeholder
+        padding: u.rem(16); //this will remove the margin collapse.
+    
+        // &--magenta{
+        //     @extend %widget;
+        //     background-color: magenta
+        // }
+
+        //moved this helper class to the __colors.scss file for reuse
+            // &.magenta{
+            //     background-color: magenta
+            // }
+   
+        &--green {  //BEM...Block element modifier
+        @extend .grid__widget; //sass extend @ rule. usually written like this
+        //instead of extend @ rule. using placeholder below.
+        @extend %widget; //only gets added to the top, allows you to only add the --green to the class name.
+        
+        background-color: hsl(120, 29%, 29%);
+    }
+
+    &--red {
+        @extend #{$widget}; //extending with sass variables using interpolation, allows you to only add the --green to the class name.
+        background-color: hsl(0, 92%, 29%);
+    }
     }
 }
